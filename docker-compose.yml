@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    image: self-signed-ca
+    build:
+      context: ./build
+      args:
+        - CA_COUNTRY=JP
+        - CA_STATE=
+        - CA_LOCAL=
+        - CA_ORGANIZATION=
+        - CA_ORGANIUNIT=
+        - CA_COMMONNAME=test-ca.test
+        - CA_DAYS=3650
+    network_mode: "none"
+    volumes:
+      - ./volumes/cert:/work/signed
+    environment:
+      - SIGN_COUNTRY=JP
+      - SIGN_STATE=
+      - SIGN_LOCAL=
+      - SIGN_ORGANIZATION=
+      - SIGN_ORGANIUNIT=
+      - SIGN_CMNNAME=myserver.test
+      - SIGN_EXT_ALTNAME=DNS:myserver.test
+      - SIGN_DAYS=3650
+      - SIGN_SERIAL=
+      - SHOW_CERT=TRUE
+      - COPY_CA_KEY=TRUE
